@@ -1,0 +1,8 @@
+#IDE
+.idea
+
+#Output
+out/production
+
+#Logs
+*.log
