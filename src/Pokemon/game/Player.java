@@ -14,7 +14,7 @@ public class Player extends MotionObject {
 
     public Player() {
         currentSprite = new Sprite(16, 32,"/images/red.png")
-                .setOrigin(0, 16)
+                .setOrigin(0, 8)
                 .setFramesPerFrame(8)
                 .animate(false);
 
@@ -28,7 +28,8 @@ public class Player extends MotionObject {
                 GenericInput.Button.Down
         ));
 
-        size.set(16,8);
+        size.set(16,16);
+        debug = true;
     }
 
     protected void bindControls(Stage stage) {
