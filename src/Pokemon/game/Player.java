@@ -29,7 +29,17 @@ public class Player extends MotionObject {
         ));
 
         size.set(16,16);
-        debug = true;
+        checkForCollisions = true;
+
+        onCollision.addListener(gameObject -> {
+
+            if(gameObject instanceof Flower){
+
+                ((Flower) gameObject ).explode();
+
+            }
+
+        });
     }
 
     protected void bindControls(Stage stage) {
