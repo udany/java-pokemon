@@ -3,10 +3,7 @@ package engine.input;
 import engine.util.Event;
 
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class GenericInput {
     public class Button {
@@ -26,6 +23,7 @@ public class GenericInput {
         public static final int Left = 11;
         public static final int Right = 12;
     }
+    private HashMap<Integer, Boolean> buttonsPressed = new HashMap<>();
 
     public final UUID id = UUID.randomUUID();
 
@@ -49,6 +47,10 @@ public class GenericInput {
                 }
             }
         });
+
+
+        onButtonDown.addListener(btn -> buttonsPressed.put(btn, true));
+        onButtonUp.addListener(btn -> buttonsPressed.put(btn, false));
     }
 
     public GenericInput applyDefaultBinding() {
@@ -73,9 +75,10 @@ public class GenericInput {
     }
 
     public GenericInput aliasKb(Integer key, Integer alias) {
-        return aliasKb(key, Arrays.asList(alias));
+        return aliasKb(key, new ArrayList<>(Arrays.asList(alias)));
     }
-    public GenericInput aliasKb(Integer key, List<Integer> alias) {
+
+    public GenericInput aliasKb(Integer key, ArrayList<Integer> alias) {
         if (!keyboardAlias.containsKey(key)) {
             keyboardAlias.put(key, alias);
         } else {
@@ -84,5 +87,13 @@ public class GenericInput {
         return this;
     }
 
-    HashMap<Integer, List<Integer>> keyboardAlias = new HashMap<>();
+    public boolean isPressed(int btn){
+        Boolean val = buttonsPressed.get(btn);
+        if(val != null){
+            return val;
+        }
+        return false;
+    }
+
+    HashMap<Integer, ArrayList<Integer>> keyboardAlias = new HashMap<>();
 }
