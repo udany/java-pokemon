@@ -1,6 +1,5 @@
 package engine.window;
 
-import Pokemon.objects.input.GalaxyInput;
 import engine.base.Size;
 import engine.input.GenericInput;
 import engine.input.Keyboard;
