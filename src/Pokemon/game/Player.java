@@ -28,7 +28,6 @@ public class Player extends MotionObject {
                 GenericInput.Button.Down
         ));
 
-        debug = true;
         size.set(16,8);
     }
 
@@ -40,9 +39,7 @@ public class Player extends MotionObject {
         inputBuffer.unbind(stage);
     }
 
-
-    @Override
-    public void update(double secondsElapsed) {
+    protected void updateMovementState() {
         int movementSpeed = 100;
         int stateOffset = 0;
 
@@ -75,8 +72,21 @@ public class Player extends MotionObject {
                     break;
             }
         }
+    }
+
+    @Override
+    public void update(double secondsElapsed) {
+        int grid = 16;
+
+        if (Math.round(position.x) % grid == 0 && Math.round(position.y) % grid == 0) {
+            updateMovementState();
+        }
+
 
         if (speed.x == 0 && speed.y == 0) {
+            position.x = Math.round(position.x);
+            position.y = Math.round(position.y);
+
             currentSprite.setFrame(0);
             currentSprite.animate(false);
         } else {

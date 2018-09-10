@@ -13,7 +13,7 @@ public class PokemonGame extends Game {
         frameRate = 60;
 
         Player player = new Player();
-        player.setPosition(600, 300);
+        player.setPosition(480, 480);
 
         addObject(player);
 
